@@ -1,0 +1,122 @@
+// Code generated with goa v3.2.3, DO NOT EDIT.
+//
+// users protocol buffer definition
+//
+// Command:
+// $ goa gen users/design
+
+syntax = "proto3";
+
+package users;
+
+option go_package = "userspb";
+
+// The users service performs user data.
+service Users {
+	// List all stored users
+	rpc List (ListRequest) returns (StoredUserCollection);
+	// Show user by Email
+	rpc Show (ShowRequest) returns (ShowResponse);
+	// Add new user and return email.
+	rpc Add (AddRequest) returns (AddResponse);
+	// Update existing user and return email.
+	rpc Update (UpdateRequest) returns (UpdateResponse);
+	// Remove user from users data
+	rpc Remove (RemoveRequest) returns (RemoveResponse);
+	// Activate users by emails
+	rpc Activate (ActivateRequest) returns (ActivateResponse);
+}
+
+message ListRequest {
+}
+
+message StoredUserCollection {
+	repeated StoredUser field = 1;
+}
+// A StoredUser describes a user retrieved by the users service.
+message StoredUser {
+	// Email of the user
+	string email = 1;
+	// First Name of the user
+	string firstname = 2;
+	// Last Name of user
+	string lastname = 3;
+	// Is user active.
+	bool isactive = 4;
+	// user role
+	string role = 5;
+}
+
+message ShowNotFoundError {
+	// Message of error
+	string message_ = 1;
+	// ID of missing user
+	string id = 2;
+}
+
+message ShowRequest {
+	// Email of user to show
+	string email = 1;
+}
+
+message ShowResponse {
+	// Email of the user
+	string email = 1;
+	// First Name of the user
+	string firstname = 2;
+	// Last Name of user
+	string lastname = 3;
+	// Is user active.
+	bool isactive = 4;
+	// user role
+	string role = 5;
+}
+
+message AddRequest {
+	// Email of the user
+	string email = 1;
+	// First Name of the user
+	string firstname = 2;
+	// Last Name of user
+	string lastname = 3;
+	// user role
+	string role = 4;
+	// Is user active.
+	bool isactive = 5;
+}
+
+message AddResponse {
+	string field = 1;
+}
+
+message UpdateRequest {
+	// Email of the user
+	string email = 1;
+	// First Name of the user
+	string firstname = 2;
+	// Last Name of user
+	string lastname = 3;
+	// user role
+	string role = 4;
+	// Is user active.
+	bool isactive = 5;
+}
+
+message UpdateResponse {
+	string field = 1;
+}
+
+message RemoveRequest {
+	// Email of user to remove
+	string email = 1;
+}
+
+message RemoveResponse {
+}
+
+message ActivateRequest {
+	repeated string field = 1;
+}
+
+message ActivateResponse {
+}

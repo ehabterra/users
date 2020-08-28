@@ -1,0 +1,89 @@
+// Code generated with goa v3.2.3, DO NOT EDIT.
+//
+// roles protocol buffer definition
+//
+// Command:
+// $ goa gen users/design
+
+syntax = "proto3";
+
+package roles;
+
+option go_package = "rolespb";
+
+// The roles service performs role data.
+service Roles {
+	// List all stored roles
+	rpc List (ListRequest) returns (StoredRoleCollection);
+	// Show role by name
+	rpc Show (ShowRequest) returns (ShowResponse);
+	// Add new role and return name.
+	rpc Add (AddRequest) returns (AddResponse);
+	// Update existing role and return name.
+	rpc Update (UpdateRequest) returns (UpdateResponse);
+	// Remove role from roles data
+	rpc Remove (RemoveRequest) returns (RemoveResponse);
+}
+
+message ListRequest {
+}
+
+message StoredRoleCollection {
+	repeated StoredRole field = 1;
+}
+// A StoredRole describes a role retrieved by the users service.
+message StoredRole {
+	// Name of role
+	string name = 1;
+	// Description of role
+	string description = 2;
+}
+
+message ShowNotFoundError {
+	// Message of error
+	string message_ = 1;
+	// ID of missing user
+	string id = 2;
+}
+
+message ShowRequest {
+	// Name of role to show
+	string name = 1;
+}
+
+message ShowResponse {
+	// Name of role
+	string name = 1;
+	// Description of role
+	string description = 2;
+}
+
+message AddRequest {
+	// Name of role
+	string name = 1;
+	// Description of role
+	string description = 2;
+}
+
+message AddResponse {
+	string field = 1;
+}
+
+message UpdateRequest {
+	// Name of role
+	string name = 1;
+	// Description of role
+	string description = 2;
+}
+
+message UpdateResponse {
+	string field = 1;
+}
+
+message RemoveRequest {
+	// Name of role to remove
+	string name = 1;
+}
+
+message RemoveResponse {
+}
