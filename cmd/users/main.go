@@ -11,9 +11,10 @@ import (
 	"strings"
 	"sync"
 	"syscall"
-	usersapi "users"
-	roles "users/gen/roles"
-	users "users/gen/users"
+	"users"
+	"users/gen/roles"
+	"users/gen/users"
+	"users/internal/db"
 
 	"github.com/boltdb/bolt"
 )
@@ -59,7 +60,7 @@ func main() {
 	)
 	{
 		// Setup database
-		bolt, err := usersapi.NewBoltDB(db)
+		bolt, err := storage.NewBoltDB(db)
 		if err != nil {
 			log.Fatal(err)
 		}

@@ -4,17 +4,18 @@ import (
 	"context"
 	"log"
 	roles "users/gen/roles"
+	"users/pkg/db"
 )
 
 // roles service example implementation.
 // The example methods log the requests and return zero values.
 type rolessrvc struct {
-	db     *Bolt
+	db     *storage.Db
 	logger *log.Logger
 }
 
 // NewRoles returns the roles service implementation.
-func NewRoles(bolt *Bolt, logger *log.Logger) roles.Service {
+func NewRoles(bolt *storage.Db, logger *log.Logger) roles.Service {
 	// Build and return service implementation.
 	return &rolessrvc{bolt, logger}
 }
@@ -26,7 +27,7 @@ func (s *rolessrvc) List(ctx context.Context, p *roles.ListPayload) (res roles.S
 	} else {
 		view = "default"
 	}
-	if err = s.db.LoadAll(roleBucket, &res); err != nil {
+	if err = s.db.LoadAll(storage.RoleBucket, &res); err != nil {
 		return nil, view, err // internal error
 	}
 	return res, view, nil
@@ -39,8 +40,8 @@ func (s *rolessrvc) Show(ctx context.Context, p *roles.ShowPayload) (res *roles.
 	} else {
 		view = "default"
 	}
-	if err = s.db.Load(roleBucket, p.Name, &res); err != nil {
-		if err == ErrNotFound {
+	if err = s.db.Load(storage.RoleBucket, p.Name, &res); err != nil {
+		if err == storage.ErrNotFound {
 			return nil, view, &roles.NotFound{
 				Message: err.Error(),
 				ID:      p.Name,
@@ -53,7 +54,7 @@ func (s *rolessrvc) Show(ctx context.Context, p *roles.ShowPayload) (res *roles.
 
 // Add new role and return name.
 func (s *rolessrvc) Add(ctx context.Context, p *roles.Role) (res string, err error) {
-	res, err = s.db.NewID(roleBucket)
+	res, err = s.db.NewID(storage.RoleBucket)
 	if err != nil {
 		return "", err // internal error
 	}
@@ -62,7 +63,7 @@ func (s *rolessrvc) Add(ctx context.Context, p *roles.Role) (res string, err err
 		Name:        p.Name,
 		Description: p.Description,
 	}
-	if err = s.db.Save(roleBucket, p.Name, &sb); err != nil {
+	if err = s.db.Save(storage.RoleBucket, p.Name, &sb); err != nil {
 		return "", err // internal error
 	}
 	return res, nil
@@ -74,7 +75,7 @@ func (s *rolessrvc) Update(ctx context.Context, p *roles.Role) (res string, err 
 		Name:        p.Name,
 		Description: p.Description,
 	}
-	if err = s.db.Save(roleBucket, p.Name, &sb); err != nil {
+	if err = s.db.Save(storage.RoleBucket, p.Name, &sb); err != nil {
 		return "", err // internal error
 	}
 	return res, nil
@@ -82,5 +83,5 @@ func (s *rolessrvc) Update(ctx context.Context, p *roles.Role) (res string, err 
 
 // Remove role from roles data
 func (s *rolessrvc) Remove(ctx context.Context, p *roles.RemovePayload) (err error) {
-	return s.db.Delete(roleBucket, p.Name) // internal error if not nil
+	return s.db.Delete(storage.RoleBucket, p.Name) // internal error if not nil
 }

@@ -8,4 +8,4 @@ go get -v -u ./...
 
 HTTP swagger UI (http://localhost:8000/swagger):
 
-![swagger](swagger-ui.png)
+![swagger](assets/swagger-ui.png)
