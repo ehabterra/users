@@ -15,7 +15,7 @@ const (
 // not exist.
 var ErrNotFound = fmt.Errorf("missing record")
 
-// Bolt db
+// Db interface
 type Db interface {
 	// NewID to get new id for specific bucket
 	NewID(string) (string, error)
@@ -28,3 +28,5 @@ type Db interface {
 	// LoadAll data
 	LoadAll(string, interface{}) error
 }
+
+

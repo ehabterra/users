@@ -11,7 +11,7 @@ import (
 	"strings"
 	"sync"
 	"syscall"
-	"users/internal/authenticator"
+	"users/internal/accountmanager"
 	"users/gen/roles"
 	"users/gen/users"
 	"users/internal/db"
@@ -66,8 +66,8 @@ func main() {
 		}
 		defer db.Close()
 
-		usersSvc = authenticator.NewUsers(bolt)
-		rolesSvc = authenticator.NewRoles(bolt)
+		usersSvc = accountmanager.NewUsers(bolt)
+		rolesSvc = accountmanager.NewRoles(bolt)
 	}
 
 	// Wrap the services in endpoints that can be invoked from other services
