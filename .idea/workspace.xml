@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2356d0d1-7061-4d81-a043-7bf639018b9a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/roles_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/users/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/users/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/authenticator/roles.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/accountmanager/roles.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/authenticator/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/accountmanager/users.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/db/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users" beforeDir="false" afterPath="$PROJECT_DIR$/users" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/roles_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/roles_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,8 +51,8 @@
       <recent name="$PROJECT_DIR$/internal/authenticator" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.Test_rolessrvc_Add in users/test">
-    <configuration name="Test_rolessrvc_Add in users/test (2)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Test.Test_rolessrvc_Add in users/test (1)">
+    <configuration name="Test_rolessrvc_Add in users/test (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="users" />
       <working_directory value="$PROJECT_DIR$/test" />
       <framework value="gotest" />
@@ -116,11 +109,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.Test_rolessrvc_Add in users/test (1)" />
         <item itemvalue="Go Test.Test_rolessrvc_Add in users/test" />
         <item itemvalue="Go Test.Test_rolessrvc_Add in users/test (5)" />
         <item itemvalue="Go Test.Test_rolessrvc_Add in users/test (4)" />
         <item itemvalue="Go Test.Test_rolessrvc_Add in users/test (3)" />
-        <item itemvalue="Go Test.Test_rolessrvc_Add in users/test (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -144,22 +137,22 @@
       <screen x="55" y="27" width="1311" height="741" />
     </state>
     <state x="592" y="266" width="216" height="261" key="EnvironmentVariablesDialog/55.27.1311.741@55.27.1311.741" timestamp="1599049733061" />
-    <state width="1238" height="222" key="GridCell.Tab.0.bottom" timestamp="1599153092581">
+    <state width="1238" height="222" key="GridCell.Tab.0.bottom" timestamp="1599211184010">
       <screen x="0" y="23" width="1280" height="715" />
     </state>
-    <state width="1238" height="222" key="GridCell.Tab.0.bottom/0.23.1280.715@0.23.1280.715" timestamp="1599153092581" />
-    <state width="1238" height="222" key="GridCell.Tab.0.center" timestamp="1599153092580">
+    <state width="1238" height="222" key="GridCell.Tab.0.bottom/0.23.1280.715@0.23.1280.715" timestamp="1599211184010" />
+    <state width="1238" height="222" key="GridCell.Tab.0.center" timestamp="1599211184009">
       <screen x="0" y="23" width="1280" height="715" />
     </state>
-    <state width="1238" height="222" key="GridCell.Tab.0.center/0.23.1280.715@0.23.1280.715" timestamp="1599153092580" />
-    <state width="1238" height="222" key="GridCell.Tab.0.left" timestamp="1599153092580">
+    <state width="1238" height="222" key="GridCell.Tab.0.center/0.23.1280.715@0.23.1280.715" timestamp="1599211184009" />
+    <state width="1238" height="222" key="GridCell.Tab.0.left" timestamp="1599211184009">
       <screen x="0" y="23" width="1280" height="715" />
     </state>
-    <state width="1238" height="222" key="GridCell.Tab.0.left/0.23.1280.715@0.23.1280.715" timestamp="1599153092580" />
-    <state width="1238" height="222" key="GridCell.Tab.0.right" timestamp="1599153092581">
+    <state width="1238" height="222" key="GridCell.Tab.0.left/0.23.1280.715@0.23.1280.715" timestamp="1599211184009" />
+    <state width="1238" height="222" key="GridCell.Tab.0.right" timestamp="1599211184009">
       <screen x="0" y="23" width="1280" height="715" />
     </state>
-    <state width="1238" height="222" key="GridCell.Tab.0.right/0.23.1280.715@0.23.1280.715" timestamp="1599153092581" />
+    <state width="1238" height="222" key="GridCell.Tab.0.right/0.23.1280.715@0.23.1280.715" timestamp="1599211184009" />
     <state x="141" y="23" width="997" height="713" key="SettingsEditor" timestamp="1599065562597">
       <screen x="0" y="23" width="1280" height="713" />
     </state>
@@ -172,5 +165,8 @@
       <screen x="0" y="23" width="1280" height="712" />
     </state>
     <state width="600" height="440" key="javadoc.popup/0.23.1280.712@0.23.1280.712" timestamp="1599069690395" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/users$Test_rolessrvc_Add_in_users_test__1_.out" NAME="Test_rolessrvc_Add in users/test (1) Coverage Results" MODIFIED="1599212727375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

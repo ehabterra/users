@@ -37,7 +37,7 @@ func Test_rolessrvc_Add(t *testing.T) {
 		{
 			"Add",
 			fields{ &mock },
-			args{ context.Background(), &r },
+			args{ context.TODO(), &r },
 			"1",
 			false,
 		},
@@ -60,6 +60,15 @@ func Test_rolessrvc_Add(t *testing.T) {
 }
 
 func Test_rolessrvc_List(t *testing.T) {
+	mock := mocks.Db{}
+	view := "default"
+	r := &roles.ListPayload{ &view }
+	des := "Administrator"
+	wantRes := roles.StoredRoleCollection{ {"admin", &des} }
+
+	res := roles.StoredRoleCollection{}
+	mock.On("LoadAll", storage.RoleBucket, &res).Return( nil)
+
 	type fields struct {
 		db storage.Db
 	}
@@ -75,7 +84,14 @@ func Test_rolessrvc_List(t *testing.T) {
 		wantView string
 		wantErr  bool
 	}{
-		// TODO: Add test cases.
+		{
+			"Test_rolessrvc_List",
+			fields{&mock },
+			args{ context.TODO(), r},
+			wantRes,
+			view,
+			false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
