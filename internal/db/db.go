@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
-	"users/pkg/db"
+	storage "users/pkg/db"
 
 	"github.com/boltdb/bolt"
 )
@@ -74,27 +74,34 @@ func (b *Bolt) Delete(bucket, id string) error {
 }
 
 // Load reads a record by ID. data is unmarshaled into and should hold a pointer.
-func (b *Bolt) Load(bucket, id string, data interface{}) error {
-	return b.client.View(func(tx *bolt.Tx) error {
+func (b *Bolt) Load(bucket, id string) (interface{}, error) {
+	var data interface{}
+
+	err := b.client.View(func(tx *bolt.Tx) error {
 		bkt := tx.Bucket([]byte(bucket))
 		v := bkt.Get([]byte(id))
 		if v == nil {
 			return storage.ErrNotFound
 		}
-		return json.Unmarshal(v, data)
+
+		err := json.Unmarshal(v, data)
+		return err
 	})
+
+	return data, err
 }
 
 // LoadAll returns all the records in the given bucket. data should be a pointer
 // to a slice. Don't do this in a real service :-)
-func (b *Bolt) LoadAll(bucket string, data interface{}) error {
+func (b *Bolt) LoadAll(bucket string) (interface{}, error) {
+
 	buf := &bytes.Buffer{}
 	err := b.client.View(func(tx *bolt.Tx) error {
 		bkt := tx.Bucket([]byte(bucket))
 		buf.WriteByte('[')
 		if bkt != nil {
 			first := true
-			bkt.ForEach(func(_, v []byte) error {
+			if err := bkt.ForEach(func(_, v []byte) error {
 				if len(v) > 0 {
 					if first {
 						first = false
@@ -105,13 +112,21 @@ func (b *Bolt) LoadAll(bucket string, data interface{}) error {
 					buf.Write(v)
 				}
 				return nil
-			})
+			}); err != nil {
+				return err
+			}
+
 		}
 		buf.WriteByte(']')
 		return nil
 	})
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return json.Unmarshal(buf.Bytes(), data)
+	var data interface{}
+	if err = json.Unmarshal(buf.Bytes(), data); err != nil {
+		return nil, err
+	}
+
+	return data, nil
 }

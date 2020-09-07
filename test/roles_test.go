@@ -7,15 +7,15 @@ import (
 	"users/gen/roles"
 	"users/internal/accountmanager"
 	"users/mocks"
-	"users/pkg/db"
+	storage "users/pkg/db"
 )
 
 func Test_rolessrvc_Add(t *testing.T) {
 	name := "admin"
 	des := "Administrator"
 	mock := mocks.Db{}
-	sp := roles.StoredRole{ Name: name, Description: &des}
-	r := roles.Role{ Name: name, Description: &des}
+	sp := roles.StoredRole{Name: name, Description: &des}
+	r := roles.Role{Name: name, Description: &des}
 
 	mock.On("NewID", storage.RoleBucket).Return("1", nil)
 	mock.On("Save", storage.RoleBucket, name, &sp).Return(nil)
@@ -36,9 +36,9 @@ func Test_rolessrvc_Add(t *testing.T) {
 	}{
 		{
 			"Add",
-			fields{ &mock },
-			args{ context.TODO(), &r },
-			"1",
+			fields{&mock},
+			args{context.TODO(), &r},
+			name,
 			false,
 		},
 	}
@@ -62,12 +62,11 @@ func Test_rolessrvc_Add(t *testing.T) {
 func Test_rolessrvc_List(t *testing.T) {
 	mock := mocks.Db{}
 	view := "default"
-	r := &roles.ListPayload{ &view }
+	r := &roles.ListPayload{&view}
 	des := "Administrator"
-	wantRes := roles.StoredRoleCollection{ {"admin", &des} }
+	wantRes := roles.StoredRoleCollection{{"admin", &des}}
 
-	res := roles.StoredRoleCollection{}
-	mock.On("LoadAll", storage.RoleBucket, &res).Return( nil)
+	mock.On("LoadAll", storage.RoleBucket).Return(wantRes, nil)
 
 	type fields struct {
 		db storage.Db
@@ -86,8 +85,8 @@ func Test_rolessrvc_List(t *testing.T) {
 	}{
 		{
 			"Test_rolessrvc_List",
-			fields{&mock },
-			args{ context.TODO(), r},
+			fields{&mock},
+			args{context.TODO(), r},
 			wantRes,
 			view,
 			false,
@@ -114,34 +113,36 @@ func Test_rolessrvc_List(t *testing.T) {
 }
 
 func Test_rolessrvc_Remove(t *testing.T) {
-	type fields struct {
-		db storage.Db
-	}
+	mock := mocks.Db{}
+	wantDelete := "admin"
 	type args struct {
 		ctx context.Context
 		p   *roles.RemovePayload
 	}
-	tests := []struct {
-		name    string
-		fields  fields
-		args    args
-		wantErr bool
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			s := &accountmanager.Rolessrvc{
-				Db: tt.fields.db,
-			}
-			if err := s.Remove(tt.args.ctx, tt.args.p); (err != nil) != tt.wantErr {
-				t.Errorf("Remove() error = %v, wantErr %v", err, tt.wantErr)
-			}
-		})
+	removePayload := &roles.RemovePayload{Name: wantDelete}
+	test := args{context.TODO(), removePayload}
+
+	mock.On("Delete", storage.RoleBucket, wantDelete).Return(nil)
+	s := accountmanager.Rolessrvc{Db: &mock}
+
+	if err := s.Remove(test.ctx, test.p); err != nil {
+		t.Errorf("Remove() error = %v", err)
 	}
 }
 
 func Test_rolessrvc_Show(t *testing.T) {
+	mock := mocks.Db{}
+	view := "default"
+	wantShow := "admin"
+	wantShow2 := "user"
+	r := &roles.ShowPayload{Name: wantShow, View: &view}
+	r2 := &roles.ShowPayload{Name: wantShow2, View: &view}
+	wantDes := "Administrator"
+	wantRes := &roles.StoredRole{Name: wantShow, Description: &wantDes}
+
+	mock.On("Load", storage.RoleBucket, wantShow).Return(wantRes, nil)
+	mock.On("Load", storage.RoleBucket, wantShow2).Return(nil, storage.ErrNotFound)
+
 	type fields struct {
 		db storage.Db
 	}
@@ -157,7 +158,22 @@ func Test_rolessrvc_Show(t *testing.T) {
 		wantView string
 		wantErr  bool
 	}{
-		// TODO: Add test cases.
+		{
+			"Test_rolessrvc_Show",
+			fields{&mock},
+			args{context.TODO(), r},
+			wantRes,
+			view,
+			false,
+		},
+		{
+			"ShowWithNotFoundError",
+			fields{&mock},
+			args{context.TODO(), r2},
+			nil,
+			view,
+			true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -180,6 +196,14 @@ func Test_rolessrvc_Show(t *testing.T) {
 }
 
 func Test_rolessrvc_Update(t *testing.T) {
+	name := "admin"
+	des := "Administrator"
+	mock := mocks.Db{}
+	sp := roles.StoredRole{Name: name, Description: &des}
+	r := roles.Role{Name: name, Description: &des}
+
+	mock.On("Save", storage.RoleBucket, name, &sp).Return(nil)
+
 	type fields struct {
 		db storage.Db
 	}
@@ -194,7 +218,13 @@ func Test_rolessrvc_Update(t *testing.T) {
 		wantRes string
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		{
+			"Update",
+			fields{&mock},
+			args{context.TODO(), &r},
+			name,
+			false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

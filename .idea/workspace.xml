@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2356d0d1-7061-4d81-a043-7bf639018b9a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/accountmanager/roles.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/accountmanager/roles.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/accountmanager/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/accountmanager/users.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/db/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mocks/Db.go" beforeDir="false" afterPath="$PROJECT_DIR$/mocks/Db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/db/db.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/roles_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/roles_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users" beforeDir="false" afterPath="$PROJECT_DIR$/users" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,11 +43,12 @@
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="ask.go.tool.to.install.GoImportsTaskConsumer" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -51,7 +58,7 @@
       <recent name="$PROJECT_DIR$/internal/authenticator" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.Test_rolessrvc_Add in users/test (1)">
+  <component name="RunManager" selected="Go Test.Test_rolessrvc_Show in users/test">
     <configuration name="Test_rolessrvc_Add in users/test (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="users" />
       <working_directory value="$PROJECT_DIR$/test" />
@@ -63,7 +70,7 @@
       <pattern value="^\QTest_rolessrvc_Add\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="Test_rolessrvc_Add in users/test (3)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="Test_rolessrvc_Show in users/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="users" />
       <working_directory value="$PROJECT_DIR$/test" />
       <framework value="gotest" />
@@ -71,10 +78,10 @@
       <package value="users/test" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTest_rolessrvc_Add\E$" />
+      <pattern value="^\QTest_rolessrvc_Show\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="Test_rolessrvc_Add in users/test (4)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="Test_rolessrvc_Update in users/test (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="users" />
       <working_directory value="$PROJECT_DIR$/test" />
       <framework value="gotest" />
@@ -82,10 +89,10 @@
       <package value="users/test" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTest_rolessrvc_Add\E$" />
+      <pattern value="^\QTest_rolessrvc_Update\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="Test_rolessrvc_Add in users/test (5)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="Test_rolessrvc_Update in users/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="users" />
       <working_directory value="$PROJECT_DIR$/test" />
       <framework value="gotest" />
@@ -93,10 +100,10 @@
       <package value="users/test" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTest_rolessrvc_Add\E$" />
+      <pattern value="^\QTest_rolessrvc_Update\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="Test_rolessrvc_Add in users/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="go test users/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="users" />
       <working_directory value="$PROJECT_DIR$/test" />
       <framework value="gotest" />
@@ -104,16 +111,15 @@
       <package value="users/test" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTest_rolessrvc_Add\E$" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.Test_rolessrvc_Show in users/test" />
+        <item itemvalue="Go Test.go test users/test" />
+        <item itemvalue="Go Test.Test_rolessrvc_Update in users/test (1)" />
+        <item itemvalue="Go Test.Test_rolessrvc_Update in users/test" />
         <item itemvalue="Go Test.Test_rolessrvc_Add in users/test (1)" />
-        <item itemvalue="Go Test.Test_rolessrvc_Add in users/test" />
-        <item itemvalue="Go Test.Test_rolessrvc_Add in users/test (5)" />
-        <item itemvalue="Go Test.Test_rolessrvc_Add in users/test (4)" />
-        <item itemvalue="Go Test.Test_rolessrvc_Add in users/test (3)" />
       </list>
     </recent_temporary>
   </component>
@@ -133,30 +139,43 @@
       <screen x="0" y="23" width="1280" height="713" />
     </state>
     <state x="389" y="256" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.23.1280.713@0.23.1280.713" timestamp="1599065624629" />
+    <state x="100" y="123" width="1080" height="515" key="DiffContextDialog" timestamp="1599493393064">
+      <screen x="0" y="23" width="1280" height="715" />
+    </state>
+    <state x="100" y="123" width="1080" height="515" key="DiffContextDialog/0.23.1280.715@0.23.1280.715" timestamp="1599493393064" />
+    <state x="290" y="165" width="698" height="460" key="EditFileWatcherDialog" timestamp="1599474473837">
+      <screen x="0" y="23" width="1280" height="715" />
+    </state>
+    <state x="290" y="165" width="698" height="460" key="EditFileWatcherDialog/0.23.1280.715@0.23.1280.715" timestamp="1599474473837" />
     <state x="592" y="266" width="216" height="261" key="EnvironmentVariablesDialog" timestamp="1599049733061">
       <screen x="55" y="27" width="1311" height="741" />
     </state>
     <state x="592" y="266" width="216" height="261" key="EnvironmentVariablesDialog/55.27.1311.741@55.27.1311.741" timestamp="1599049733061" />
-    <state width="1238" height="222" key="GridCell.Tab.0.bottom" timestamp="1599211184010">
+    <state width="1238" height="223" key="GridCell.Tab.0.bottom" timestamp="1599498485508">
       <screen x="0" y="23" width="1280" height="715" />
     </state>
-    <state width="1238" height="222" key="GridCell.Tab.0.bottom/0.23.1280.715@0.23.1280.715" timestamp="1599211184010" />
-    <state width="1238" height="222" key="GridCell.Tab.0.center" timestamp="1599211184009">
+    <state width="1238" height="223" key="GridCell.Tab.0.bottom/0.23.1280.715@0.23.1280.715" timestamp="1599498485508" />
+    <state width="1238" height="223" key="GridCell.Tab.0.bottom/0.23.1280.717@0.23.1280.717" timestamp="1599475529442" />
+    <state width="1238" height="223" key="GridCell.Tab.0.center" timestamp="1599498485508">
       <screen x="0" y="23" width="1280" height="715" />
     </state>
-    <state width="1238" height="222" key="GridCell.Tab.0.center/0.23.1280.715@0.23.1280.715" timestamp="1599211184009" />
-    <state width="1238" height="222" key="GridCell.Tab.0.left" timestamp="1599211184009">
+    <state width="1238" height="223" key="GridCell.Tab.0.center/0.23.1280.715@0.23.1280.715" timestamp="1599498485508" />
+    <state width="1238" height="223" key="GridCell.Tab.0.center/0.23.1280.717@0.23.1280.717" timestamp="1599475529441" />
+    <state width="1238" height="223" key="GridCell.Tab.0.left" timestamp="1599498485507">
       <screen x="0" y="23" width="1280" height="715" />
     </state>
-    <state width="1238" height="222" key="GridCell.Tab.0.left/0.23.1280.715@0.23.1280.715" timestamp="1599211184009" />
-    <state width="1238" height="222" key="GridCell.Tab.0.right" timestamp="1599211184009">
+    <state width="1238" height="223" key="GridCell.Tab.0.left/0.23.1280.715@0.23.1280.715" timestamp="1599498485507" />
+    <state width="1238" height="223" key="GridCell.Tab.0.left/0.23.1280.717@0.23.1280.717" timestamp="1599475529441" />
+    <state width="1238" height="223" key="GridCell.Tab.0.right" timestamp="1599498485508">
       <screen x="0" y="23" width="1280" height="715" />
     </state>
-    <state width="1238" height="222" key="GridCell.Tab.0.right/0.23.1280.715@0.23.1280.715" timestamp="1599211184009" />
-    <state x="141" y="23" width="997" height="713" key="SettingsEditor" timestamp="1599065562597">
-      <screen x="0" y="23" width="1280" height="713" />
+    <state width="1238" height="223" key="GridCell.Tab.0.right/0.23.1280.715@0.23.1280.715" timestamp="1599498485508" />
+    <state width="1238" height="223" key="GridCell.Tab.0.right/0.23.1280.717@0.23.1280.717" timestamp="1599475529442" />
+    <state x="141" y="23" width="997" height="715" key="SettingsEditor" timestamp="1599474474791">
+      <screen x="0" y="23" width="1280" height="715" />
     </state>
     <state x="141" y="23" width="997" height="713" key="SettingsEditor/0.23.1280.713@0.23.1280.713" timestamp="1599065562597" />
+    <state x="141" y="23" width="997" height="715" key="SettingsEditor/0.23.1280.715@0.23.1280.715" timestamp="1599474474791" />
     <state x="342" y="23" width="596" height="715" key="find.popup" timestamp="1599130414074">
       <screen x="0" y="23" width="1280" height="715" />
     </state>
@@ -168,5 +187,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/users$Test_rolessrvc_Add_in_users_test__1_.out" NAME="Test_rolessrvc_Add in users/test (1) Coverage Results" MODIFIED="1599212727375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/users$Test_rolessrvc_List_in_users_test__2_.out" NAME="Test_rolessrvc_List in users/test (2) Coverage Results" MODIFIED="1599484452723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/users$go_test_users_test.out" NAME="go test users/test Coverage Results" MODIFIED="1599498056670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

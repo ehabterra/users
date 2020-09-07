@@ -3,19 +3,19 @@ package accountmanager
 import (
 	"context"
 	"users/gen/roles"
-	"users/pkg/db"
+	storage "users/pkg/db"
 )
 
 // roles service example implementation.
 // The example methods log the requests and return zero values.
 type Rolessrvc struct {
-	Db     storage.Db
+	Db storage.Db
 }
 
 // NewRoles returns the roles service implementation.
 func NewRoles(bolt storage.Db) roles.Service {
 	// Build and return service implementation.
-	return &Rolessrvc{bolt }
+	return &Rolessrvc{bolt}
 }
 
 // List all stored roles
@@ -25,7 +25,10 @@ func (s *Rolessrvc) List(ctx context.Context, p *roles.ListPayload) (res roles.S
 	} else {
 		view = "default"
 	}
-	if err = s.Db.LoadAll(storage.RoleBucket, &res); err != nil {
+
+	x, errc := s.Db.LoadAll(storage.RoleBucket)
+	res = x.(roles.StoredRoleCollection)
+	if errc != nil {
 		return nil, view, err // internal error
 	}
 	return res, view, nil
@@ -38,7 +41,9 @@ func (s *Rolessrvc) Show(ctx context.Context, p *roles.ShowPayload) (res *roles.
 	} else {
 		view = "default"
 	}
-	if err = s.Db.Load(storage.RoleBucket, p.Name, &res); err != nil {
+
+	x, err := s.Db.Load(storage.RoleBucket, p.Name)
+	if err != nil {
 		if err == storage.ErrNotFound {
 			return nil, view, &roles.NotFound{
 				Message: err.Error(),
@@ -47,6 +52,8 @@ func (s *Rolessrvc) Show(ctx context.Context, p *roles.ShowPayload) (res *roles.
 		}
 		return nil, view, err // internal error
 	}
+	res = x.(*roles.StoredRole)
+
 	return res, view, nil
 }
 
@@ -64,7 +71,7 @@ func (s *Rolessrvc) Add(ctx context.Context, p *roles.Role) (res string, err err
 	if err = s.Db.Save(storage.RoleBucket, p.Name, &sb); err != nil {
 		return "", err // internal error
 	}
-	return res, nil
+	return p.Name, nil
 }
 
 // Update existing role and return name.
@@ -76,7 +83,7 @@ func (s *Rolessrvc) Update(ctx context.Context, p *roles.Role) (res string, err 
 	if err = s.Db.Save(storage.RoleBucket, p.Name, &sb); err != nil {
 		return "", err // internal error
 	}
-	return res, nil
+	return p.Name, nil
 }
 
 // Remove role from roles data
