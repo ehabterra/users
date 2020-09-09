@@ -24,7 +24,7 @@ type Db interface {
 	// Delete data
 	Delete(string, string) error
 	// Load data
-	Load(string, string) (interface{}, error)
+	Load(string, string, interface{}) error
 	// LoadAll data
-	LoadAll(bucket string) (interface{}, error)
+	LoadAll(string, interface{}) error
 }

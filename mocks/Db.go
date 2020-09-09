@@ -23,50 +23,32 @@ func (_m *Db) Delete(_a0 string, _a1 string) error {
 	return r0
 }
 
-// Load provides a mock function with given fields: _a0, _a1
-func (_m *Db) Load(_a0 string, _a1 string) (interface{}, error) {
-	ret := _m.Called(_a0, _a1)
+// Load provides a mock function with given fields: _a0, _a1, _a2
+func (_m *Db) Load(_a0 string, _a1 string, _a2 interface{}) error {
+	ret := _m.Called(_a0, _a1, _a2)
 
-	var r0 interface{}
-	if rf, ok := ret.Get(0).(func(string, string) interface{}); ok {
-		r0 = rf(_a0, _a1)
+	var r0 error
+	if rf, ok := ret.Get(0).(func(string, string, interface{}) error); ok {
+		r0 = rf(_a0, _a1, _a2)
 	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(interface{})
-		}
+		r0 = ret.Error(0)
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(string, string) error); ok {
-		r1 = rf(_a0, _a1)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
-// LoadAll provides a mock function with given fields: bucket
-func (_m *Db) LoadAll(bucket string) (interface{}, error) {
-	ret := _m.Called(bucket)
+// LoadAll provides a mock function with given fields: _a0, _a1
+func (_m *Db) LoadAll(_a0 string, _a1 interface{}) error {
+	ret := _m.Called(_a0, _a1)
 
-	var r0 interface{}
-	if rf, ok := ret.Get(0).(func(string) interface{}); ok {
-		r0 = rf(bucket)
+	var r0 error
+	if rf, ok := ret.Get(0).(func(string, interface{}) error); ok {
+		r0 = rf(_a0, _a1)
 	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(interface{})
-		}
+		r0 = ret.Error(0)
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(string) error); ok {
-		r1 = rf(bucket)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
 // NewID provides a mock function with given fields: _a0

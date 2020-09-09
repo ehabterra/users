@@ -74,9 +74,7 @@ func (b *Bolt) Delete(bucket, id string) error {
 }
 
 // Load reads a record by ID. data is unmarshaled into and should hold a pointer.
-func (b *Bolt) Load(bucket, id string) (interface{}, error) {
-	var data interface{}
-
+func (b *Bolt) Load(bucket, id string, data interface{}) error {
 	err := b.client.View(func(tx *bolt.Tx) error {
 		bkt := tx.Bucket([]byte(bucket))
 		v := bkt.Get([]byte(id))
@@ -88,12 +86,12 @@ func (b *Bolt) Load(bucket, id string) (interface{}, error) {
 		return err
 	})
 
-	return data, err
+	return err
 }
 
 // LoadAll returns all the records in the given bucket. data should be a pointer
 // to a slice. Don't do this in a real service :-)
-func (b *Bolt) LoadAll(bucket string) (interface{}, error) {
+func (b *Bolt) LoadAll(bucket string, data interface{}) error {
 
 	buf := &bytes.Buffer{}
 	err := b.client.View(func(tx *bolt.Tx) error {
@@ -121,12 +119,12 @@ func (b *Bolt) LoadAll(bucket string) (interface{}, error) {
 		return nil
 	})
 	if err != nil {
-		return nil, err
+		return err
 	}
-	var data interface{}
+	fmt.Printf("Buffer: %s\n", buf.Bytes())
 	if err = json.Unmarshal(buf.Bytes(), data); err != nil {
-		return nil, err
+		return err
 	}
 
-	return data, nil
+	return nil
 }

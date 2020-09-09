@@ -11,10 +11,12 @@ import (
 	"strings"
 	"sync"
 	"syscall"
-	"users/internal/accountmanager"
+	"users/api"
 	"users/gen/roles"
 	"users/gen/users"
-	"users/internal/db"
+	storage "users/internal/db"
+	"users/internal/role"
+	"users/internal/user"
 
 	"github.com/boltdb/bolt"
 )
@@ -55,8 +57,8 @@ func main() {
 
 	// Initialize the services.
 	var (
-		usersSvc users.Service
-		rolesSvc roles.Service
+		userAPI users.Service
+		roleAPI roles.Service
 	)
 	{
 		// Setup database
@@ -66,8 +68,11 @@ func main() {
 		}
 		defer db.Close()
 
-		usersSvc = accountmanager.NewUsers(bolt)
-		rolesSvc = accountmanager.NewRoles(bolt)
+		roleManager := role.NewManager(bolt)
+		userManager := user.NewManager(bolt)
+
+		userAPI = api.NewUserAPI(userManager)
+		roleAPI = api.NewRoleAPI(roleManager)
 	}
 
 	// Wrap the services in endpoints that can be invoked from other services
@@ -77,8 +82,8 @@ func main() {
 		rolesEndpoints *roles.Endpoints
 	)
 	{
-		usersEndpoints = users.NewEndpoints(usersSvc)
-		rolesEndpoints = roles.NewEndpoints(rolesSvc)
+		usersEndpoints = users.NewEndpoints(userAPI)
+		rolesEndpoints = roles.NewEndpoints(roleAPI)
 	}
 
 	// Create channel used by both the signal handler and server goroutines

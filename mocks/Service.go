@@ -4,7 +4,7 @@ package mocks
 
 import (
 	context "context"
-	users "users/gen/users"
+	roles "users/gen/roles"
 
 	mock "github.com/stretchr/testify/mock"
 )
@@ -14,33 +14,19 @@ type Service struct {
 	mock.Mock
 }
 
-// Activate provides a mock function with given fields: _a0, _a1
-func (_m *Service) Activate(_a0 context.Context, _a1 []string) error {
-	ret := _m.Called(_a0, _a1)
-
-	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, []string) error); ok {
-		r0 = rf(_a0, _a1)
-	} else {
-		r0 = ret.Error(0)
-	}
-
-	return r0
-}
-
 // Add provides a mock function with given fields: _a0, _a1
-func (_m *Service) Add(_a0 context.Context, _a1 *users.User) (string, error) {
+func (_m *Service) Add(_a0 context.Context, _a1 *roles.Role) (string, error) {
 	ret := _m.Called(_a0, _a1)
 
 	var r0 string
-	if rf, ok := ret.Get(0).(func(context.Context, *users.User) string); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *roles.Role) string); ok {
 		r0 = rf(_a0, _a1)
 	} else {
 		r0 = ret.Get(0).(string)
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *users.User) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *roles.Role) error); ok {
 		r1 = rf(_a0, _a1)
 	} else {
 		r1 = ret.Error(1)
@@ -50,27 +36,27 @@ func (_m *Service) Add(_a0 context.Context, _a1 *users.User) (string, error) {
 }
 
 // List provides a mock function with given fields: _a0, _a1
-func (_m *Service) List(_a0 context.Context, _a1 *users.ListPayload) (users.StoredUserCollection, string, error) {
+func (_m *Service) List(_a0 context.Context, _a1 *roles.ListPayload) (roles.StoredRoleCollection, string, error) {
 	ret := _m.Called(_a0, _a1)
 
-	var r0 users.StoredUserCollection
-	if rf, ok := ret.Get(0).(func(context.Context, *users.ListPayload) users.StoredUserCollection); ok {
+	var r0 roles.StoredRoleCollection
+	if rf, ok := ret.Get(0).(func(context.Context, *roles.ListPayload) roles.StoredRoleCollection); ok {
 		r0 = rf(_a0, _a1)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(users.StoredUserCollection)
+			r0 = ret.Get(0).(roles.StoredRoleCollection)
 		}
 	}
 
 	var r1 string
-	if rf, ok := ret.Get(1).(func(context.Context, *users.ListPayload) string); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *roles.ListPayload) string); ok {
 		r1 = rf(_a0, _a1)
 	} else {
 		r1 = ret.Get(1).(string)
 	}
 
 	var r2 error
-	if rf, ok := ret.Get(2).(func(context.Context, *users.ListPayload) error); ok {
+	if rf, ok := ret.Get(2).(func(context.Context, *roles.ListPayload) error); ok {
 		r2 = rf(_a0, _a1)
 	} else {
 		r2 = ret.Error(2)
@@ -80,11 +66,11 @@ func (_m *Service) List(_a0 context.Context, _a1 *users.ListPayload) (users.Stor
 }
 
 // Remove provides a mock function with given fields: _a0, _a1
-func (_m *Service) Remove(_a0 context.Context, _a1 *users.RemovePayload) error {
+func (_m *Service) Remove(_a0 context.Context, _a1 *roles.RemovePayload) error {
 	ret := _m.Called(_a0, _a1)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, *users.RemovePayload) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *roles.RemovePayload) error); ok {
 		r0 = rf(_a0, _a1)
 	} else {
 		r0 = ret.Error(0)
@@ -94,27 +80,27 @@ func (_m *Service) Remove(_a0 context.Context, _a1 *users.RemovePayload) error {
 }
 
 // Show provides a mock function with given fields: _a0, _a1
-func (_m *Service) Show(_a0 context.Context, _a1 *users.ShowPayload) (*users.StoredUser, string, error) {
+func (_m *Service) Show(_a0 context.Context, _a1 *roles.ShowPayload) (*roles.StoredRole, string, error) {
 	ret := _m.Called(_a0, _a1)
 
-	var r0 *users.StoredUser
-	if rf, ok := ret.Get(0).(func(context.Context, *users.ShowPayload) *users.StoredUser); ok {
+	var r0 *roles.StoredRole
+	if rf, ok := ret.Get(0).(func(context.Context, *roles.ShowPayload) *roles.StoredRole); ok {
 		r0 = rf(_a0, _a1)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*users.StoredUser)
+			r0 = ret.Get(0).(*roles.StoredRole)
 		}
 	}
 
 	var r1 string
-	if rf, ok := ret.Get(1).(func(context.Context, *users.ShowPayload) string); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *roles.ShowPayload) string); ok {
 		r1 = rf(_a0, _a1)
 	} else {
 		r1 = ret.Get(1).(string)
 	}
 
 	var r2 error
-	if rf, ok := ret.Get(2).(func(context.Context, *users.ShowPayload) error); ok {
+	if rf, ok := ret.Get(2).(func(context.Context, *roles.ShowPayload) error); ok {
 		r2 = rf(_a0, _a1)
 	} else {
 		r2 = ret.Error(2)
@@ -124,18 +110,18 @@ func (_m *Service) Show(_a0 context.Context, _a1 *users.ShowPayload) (*users.Sto
 }
 
 // Update provides a mock function with given fields: _a0, _a1
-func (_m *Service) Update(_a0 context.Context, _a1 *users.User) (string, error) {
+func (_m *Service) Update(_a0 context.Context, _a1 *roles.Role) (string, error) {
 	ret := _m.Called(_a0, _a1)
 
 	var r0 string
-	if rf, ok := ret.Get(0).(func(context.Context, *users.User) string); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *roles.Role) string); ok {
 		r0 = rf(_a0, _a1)
 	} else {
 		r0 = ret.Get(0).(string)
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *users.User) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *roles.Role) error); ok {
 		r1 = rf(_a0, _a1)
 	} else {
 		r1 = ret.Error(1)
