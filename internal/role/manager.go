@@ -1,6 +1,7 @@
 package role
 
 import (
+	"fmt"
 	"users/gen/roles"
 	storage "users/pkg/db"
 )
@@ -15,10 +16,11 @@ func NewManager(bolt storage.Db) *Manager {
 	return &Manager{bolt}
 }
 
+// List roles
 func (m *Manager) List() (res roles.StoredRoleCollection, err error) {
-	err = m.Db.LoadAll(storage.RoleBucket, &res)
+	err = m.Db.LoadAll(&res)
 	if err != nil {
-		return nil, err // internal error
+		return nil, err
 	}
 	return res, nil
 }
@@ -26,7 +28,7 @@ func (m *Manager) List() (res roles.StoredRoleCollection, err error) {
 // Show role by name
 func (m *Manager) Show(name string) (res *roles.StoredRole, err error) {
 	res = &roles.StoredRole{}
-	err = m.Db.Load(storage.RoleBucket, name, res)
+	err = m.Db.Load(name, res)
 	if err != nil {
 		if err == storage.ErrNotFound {
 			return nil, &roles.NotFound{
@@ -34,7 +36,7 @@ func (m *Manager) Show(name string) (res *roles.StoredRole, err error) {
 				ID:      name,
 			}
 		}
-		return nil, err // internal error
+		return nil, err
 	}
 	return res, nil
 }
@@ -45,8 +47,8 @@ func (m *Manager) Add(p *roles.Role) error {
 		Name:        p.Name,
 		Description: p.Description,
 	}
-	if err := m.Db.Save(storage.RoleBucket, p.Name, &sb); err != nil {
-		return err // internal error
+	if err := m.Db.Save(p.Name, &sb); err != nil {
+		return err
 	}
 	return nil
 }
@@ -56,13 +58,32 @@ func (m *Manager) Update(p *roles.Role) error {
 		Name:        p.Name,
 		Description: p.Description,
 	}
-	if err := m.Db.Save(storage.RoleBucket, p.Name, &sb); err != nil {
-		return err // internal error
+	if err := m.Db.Save(p.Name, &sb); err != nil {
+		return err
 	}
 	return nil
 }
 
 // Remove role from roles data
 func (m *Manager) Remove(name string) (err error) {
-	return m.Db.Delete(storage.RoleBucket, name) // internal error if not nil
+	return m.Db.Delete(name)
+}
+
+func (m *Manager) CheckRoleExists(role string) (bool, error) {
+	res := &roles.StoredRole{}
+	err := m.Db.Load(role, res)
+	fmt.Printf("res: %v\n", *res)
+
+	// Check role existence
+	if err != nil {
+		if err == storage.ErrNotFound {
+			return false, &roles.NotFound{
+				Message: err.Error(),
+				ID:      role,
+			}
+		}
+		return false, err
+	}
+	return true, nil
+
 }

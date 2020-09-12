@@ -10,36 +10,35 @@ import (
 	"github.com/boltdb/bolt"
 )
 
+type Bucket string
+
 // Bolt is the database driver.
 type Bolt struct {
 	// client is the Bolt client.
 	client *bolt.DB
+	bucket Bucket
 }
 
 // NewBoltDB creates a Bolt DB database driver given an underlying client.
-func NewBoltDB(client *bolt.DB) (*Bolt, error) {
+func NewBoltDB(client *bolt.DB, bucket Bucket) (*Bolt, error) {
 	err := client.Update(func(tx *bolt.Tx) error {
-		_, err := tx.CreateBucketIfNotExists([]byte(storage.UserBucket))
+		_, err := tx.CreateBucketIfNotExists([]byte(bucket))
 		if err != nil {
-			return fmt.Errorf("could not create user bucket: %v", err)
-		}
-		_, err = tx.CreateBucketIfNotExists([]byte(storage.RoleBucket))
-		if err != nil {
-			return fmt.Errorf("could not create role bucket: %v", err)
+			return fmt.Errorf("could not %v user bucket: %v", bucket, err)
 		}
 		return nil
 	})
 	if err != nil {
 		return nil, err
 	}
-	return &Bolt{client}, nil
+	return &Bolt{client, bucket}, nil
 }
 
 // NewID returns a unique ID for the given bucket.
-func (b *Bolt) NewID(bucket string) (string, error) {
+func (b *Bolt) NewID() (string, error) {
 	var sid string
 	err := b.client.Update(func(tx *bolt.Tx) error {
-		bkt := tx.Bucket([]byte(bucket))
+		bkt := tx.Bucket([]byte(b.bucket))
 		id, err := bkt.NextSequence()
 		if err != nil {
 			return err
@@ -52,13 +51,13 @@ func (b *Bolt) NewID(bucket string) (string, error) {
 
 // Save writes the record to the DB and returns the corresponding new ID.
 // data must contain a value that can be marshaled by the encoding/json package.
-func (b *Bolt) Save(bucket, id string, data interface{}) error {
+func (b *Bolt) Save(id string, data interface{}) error {
 	buf, err := json.Marshal(data)
 	if err != nil {
 		return err
 	}
 	return b.client.Update(func(tx *bolt.Tx) error {
-		bkt := tx.Bucket([]byte(bucket))
+		bkt := tx.Bucket([]byte(b.bucket))
 		if err := bkt.Put([]byte(id), buf); err != nil {
 			return err
 		}
@@ -67,16 +66,16 @@ func (b *Bolt) Save(bucket, id string, data interface{}) error {
 }
 
 // Delete deletes a record by ID.
-func (b *Bolt) Delete(bucket, id string) error {
+func (b *Bolt) Delete(id string) error {
 	return b.client.Update(func(tx *bolt.Tx) error {
-		return tx.Bucket([]byte(bucket)).Delete([]byte(id))
+		return tx.Bucket([]byte(b.bucket)).Delete([]byte(id))
 	})
 }
 
 // Load reads a record by ID. data is unmarshaled into and should hold a pointer.
-func (b *Bolt) Load(bucket, id string, data interface{}) error {
+func (b *Bolt) Load(id string, data interface{}) error {
 	err := b.client.View(func(tx *bolt.Tx) error {
-		bkt := tx.Bucket([]byte(bucket))
+		bkt := tx.Bucket([]byte(b.bucket))
 		v := bkt.Get([]byte(id))
 		if v == nil {
 			return storage.ErrNotFound
@@ -91,11 +90,11 @@ func (b *Bolt) Load(bucket, id string, data interface{}) error {
 
 // LoadAll returns all the records in the given bucket. data should be a pointer
 // to a slice. Don't do this in a real service :-)
-func (b *Bolt) LoadAll(bucket string, data interface{}) error {
+func (b *Bolt) LoadAll(data interface{}) error {
 
 	buf := &bytes.Buffer{}
 	err := b.client.View(func(tx *bolt.Tx) error {
-		bkt := tx.Bucket([]byte(bucket))
+		bkt := tx.Bucket([]byte(b.bucket))
 		buf.WriteByte('[')
 		if bkt != nil {
 			first := true

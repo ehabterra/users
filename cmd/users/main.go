@@ -21,6 +21,13 @@ import (
 	"github.com/boltdb/bolt"
 )
 
+const (
+	// RoleBucket db
+	RoleBucket storage.Bucket = "ROLE"
+	// UserBucket db
+	UserBucket storage.Bucket = "USER"
+)
+
 func main() {
 	// Define command line flags, add any other flag required to configure the
 	// service.
@@ -40,7 +47,7 @@ func main() {
 		logger *log.Logger
 	)
 	{
-		logger = log.New(os.Stderr, "[usersapi] ", log.Ltime)
+		logger = log.New(os.Stderr, "[user-manager] ", log.Ltime)
 	}
 
 	// Initialize service dependencies such as databases.
@@ -62,17 +69,13 @@ func main() {
 	)
 	{
 		// Setup database
-		bolt, err := storage.NewBoltDB(db)
-		if err != nil {
-			log.Fatal(err)
-		}
 		defer db.Close()
 
-		roleManager := role.NewManager(bolt)
-		userManager := user.NewManager(bolt)
+		roleManager := role.NewManager(getBoltDB(db, RoleBucket))
+		userManager := user.NewManager(getBoltDB(db, UserBucket), roleManager)
 
-		userAPI = api.NewUserAPI(userManager)
-		roleAPI = api.NewRoleAPI(roleManager)
+		userAPI = api.NewUser(userManager)
+		roleAPI = api.NewRole(roleManager)
 	}
 
 	// Wrap the services in endpoints that can be invoked from other services
@@ -127,7 +130,7 @@ func main() {
 		}
 
 		{
-			addr := "grpc://localhost:8080"
+			addr := "grpc://0.0.0.0:8080"
 			u, err := url.Parse(addr)
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "invalid URL %#v: %s\n", addr, err)
@@ -207,4 +210,12 @@ func main() {
 
 	wg.Wait()
 	logger.Println("exited")
+}
+
+func getBoltDB(db *bolt.DB, bucket storage.Bucket) *storage.Bolt {
+	bolt, err := storage.NewBoltDB(db, bucket)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return bolt
 }

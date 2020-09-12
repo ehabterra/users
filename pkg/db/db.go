@@ -4,13 +4,6 @@ import (
 	"fmt"
 )
 
-const (
-	// RoleBucket db
-	RoleBucket string = "ROLE"
-	// UserBucket db
-	UserBucket string = "USER"
-)
-
 // ErrNotFound is the error returned when attempting to load a record that does
 // not exist.
 var ErrNotFound = fmt.Errorf("missing record")
@@ -18,13 +11,13 @@ var ErrNotFound = fmt.Errorf("missing record")
 // Db interface
 type Db interface {
 	// NewID to get new id for specific bucket
-	NewID(string) (string, error)
+	NewID() (string, error)
 	// Save data
-	Save(string, string, interface{}) error
+	Save(string, interface{}) error
 	// Delete data
-	Delete(string, string) error
+	Delete(string) error
 	// Load data
-	Load(string, string, interface{}) error
+	Load(string, interface{}) error
 	// LoadAll data
-	LoadAll(string, interface{}) error
+	LoadAll(interface{}) error
 }

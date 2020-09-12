@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2356d0d1-7061-4d81-a043-7bf639018b9a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/role_api.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/role.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/user_api.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/users/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/users/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/db/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/openapi/openapi.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/role/manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/role/manager.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/user/manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/user/manager.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/db/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users.db" beforeDir="false" afterPath="$PROJECT_DIR$/users.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +63,7 @@
       <recent name="$PROJECT_DIR$/internal/authenticator" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.Dockerfile">
+  <component name="RunManager" selected="Go Test.go test users/internal/user">
     <configuration name="TestManager_Remove in users/internal/user" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="users" />
       <working_directory value="$PROJECT_DIR$/internal/user" />
@@ -109,8 +117,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.Dockerfile" />
         <item itemvalue="Go Test.go test users/internal/user" />
+        <item itemvalue="Docker.Dockerfile" />
         <item itemvalue="Go Test.TestManager_Show in users/internal/user (1)" />
         <item itemvalue="Go Test.TestManager_Show in users/internal/user" />
         <item itemvalue="Go Test.TestManager_Remove in users/internal/user" />
@@ -149,37 +157,37 @@
       <screen x="55" y="27" width="1311" height="741" />
     </state>
     <state x="592" y="266" width="216" height="261" key="EnvironmentVariablesDialog/55.27.1311.741@55.27.1311.741" timestamp="1599049733061" />
-    <state width="1238" height="215" key="GridCell.Tab.0.bottom" timestamp="1599731751425">
+    <state width="1238" height="225" key="GridCell.Tab.0.bottom" timestamp="1599756036577">
       <screen x="0" y="23" width="1280" height="723" />
     </state>
     <state width="1238" height="215" key="GridCell.Tab.0.bottom/0.23.1280.715@0.23.1280.715" timestamp="1599500483747" />
     <state width="1238" height="223" key="GridCell.Tab.0.bottom/0.23.1280.717@0.23.1280.717" timestamp="1599475529442" />
     <state width="1238" height="223" key="GridCell.Tab.0.bottom/0.23.1280.721@0.23.1280.721" timestamp="1599647039934" />
-    <state width="1238" height="215" key="GridCell.Tab.0.bottom/0.23.1280.723@0.23.1280.723" timestamp="1599731751425" />
+    <state width="1238" height="225" key="GridCell.Tab.0.bottom/0.23.1280.723@0.23.1280.723" timestamp="1599756036577" />
     <state width="1238" height="223" key="GridCell.Tab.0.bottom/0.23.1280.724@0.23.1280.724" timestamp="1599653065312" />
-    <state width="1238" height="215" key="GridCell.Tab.0.center" timestamp="1599731751425">
+    <state width="1238" height="225" key="GridCell.Tab.0.center" timestamp="1599756036577">
       <screen x="0" y="23" width="1280" height="723" />
     </state>
     <state width="1238" height="215" key="GridCell.Tab.0.center/0.23.1280.715@0.23.1280.715" timestamp="1599500483746" />
     <state width="1238" height="223" key="GridCell.Tab.0.center/0.23.1280.717@0.23.1280.717" timestamp="1599475529441" />
     <state width="1238" height="223" key="GridCell.Tab.0.center/0.23.1280.721@0.23.1280.721" timestamp="1599647039933" />
-    <state width="1238" height="215" key="GridCell.Tab.0.center/0.23.1280.723@0.23.1280.723" timestamp="1599731751425" />
+    <state width="1238" height="225" key="GridCell.Tab.0.center/0.23.1280.723@0.23.1280.723" timestamp="1599756036577" />
     <state width="1238" height="223" key="GridCell.Tab.0.center/0.23.1280.724@0.23.1280.724" timestamp="1599653065311" />
-    <state width="1238" height="215" key="GridCell.Tab.0.left" timestamp="1599731751424">
+    <state width="1238" height="225" key="GridCell.Tab.0.left" timestamp="1599756036576">
       <screen x="0" y="23" width="1280" height="723" />
     </state>
     <state width="1238" height="215" key="GridCell.Tab.0.left/0.23.1280.715@0.23.1280.715" timestamp="1599500483745" />
     <state width="1238" height="223" key="GridCell.Tab.0.left/0.23.1280.717@0.23.1280.717" timestamp="1599475529441" />
     <state width="1238" height="223" key="GridCell.Tab.0.left/0.23.1280.721@0.23.1280.721" timestamp="1599647039930" />
-    <state width="1238" height="215" key="GridCell.Tab.0.left/0.23.1280.723@0.23.1280.723" timestamp="1599731751424" />
+    <state width="1238" height="225" key="GridCell.Tab.0.left/0.23.1280.723@0.23.1280.723" timestamp="1599756036576" />
     <state width="1238" height="223" key="GridCell.Tab.0.left/0.23.1280.724@0.23.1280.724" timestamp="1599653065311" />
-    <state width="1238" height="215" key="GridCell.Tab.0.right" timestamp="1599731751425">
+    <state width="1238" height="225" key="GridCell.Tab.0.right" timestamp="1599756036577">
       <screen x="0" y="23" width="1280" height="723" />
     </state>
     <state width="1238" height="215" key="GridCell.Tab.0.right/0.23.1280.715@0.23.1280.715" timestamp="1599500483746" />
     <state width="1238" height="223" key="GridCell.Tab.0.right/0.23.1280.717@0.23.1280.717" timestamp="1599475529442" />
     <state width="1238" height="223" key="GridCell.Tab.0.right/0.23.1280.721@0.23.1280.721" timestamp="1599647039933" />
-    <state width="1238" height="215" key="GridCell.Tab.0.right/0.23.1280.723@0.23.1280.723" timestamp="1599731751425" />
+    <state width="1238" height="225" key="GridCell.Tab.0.right/0.23.1280.723@0.23.1280.723" timestamp="1599756036577" />
     <state width="1238" height="223" key="GridCell.Tab.0.right/0.23.1280.724@0.23.1280.724" timestamp="1599653065312" />
     <state width="1238" height="215" key="GridCell.Tab.1.bottom" timestamp="1599731751426">
       <screen x="0" y="23" width="1280" height="723" />
@@ -206,6 +214,10 @@
     </state>
     <state x="141" y="23" width="997" height="713" key="SettingsEditor/0.23.1280.713@0.23.1280.713" timestamp="1599065562597" />
     <state x="141" y="23" width="997" height="715" key="SettingsEditor/0.23.1280.715@0.23.1280.715" timestamp="1599500338436" />
+    <state x="399" y="168" key="com.goide.refactor.move.GoMoveDeclarationDialog" timestamp="1599926592515">
+      <screen x="0" y="23" width="1280" height="724" />
+    </state>
+    <state x="399" y="168" key="com.goide.refactor.move.GoMoveDeclarationDialog/0.23.1280.724@0.23.1280.724" timestamp="1599926592515" />
     <state x="342" y="23" width="596" height="715" key="find.popup" timestamp="1599130414074">
       <screen x="0" y="23" width="1280" height="715" />
     </state>
