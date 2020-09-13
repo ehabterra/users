@@ -1,4 +1,4 @@
-# users
+# User Manager
 Golang users with boltdb
 
 
