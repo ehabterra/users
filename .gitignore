@@ -4,6 +4,8 @@
 *.dll
 *.so
 *.dylib
+users
+users-cli
 
 # Test binary, built with `go test -c`
 *.test
@@ -12,4 +14,7 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+vendor/
+
+# Database
+*.db
