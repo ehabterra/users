@@ -3,17 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2356d0d1-7061-4d81-a043-7bf639018b9a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/role_api.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/role.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/user_api.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/users/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/users/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/db/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/openapi/openapi.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/role/manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/role/manager.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/user/manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/user/manager.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/db/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users.db" beforeDir="false" afterPath="$PROJECT_DIR$/users.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/role/manager_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/role/manager_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +41,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="go.vendoring.notification.had.been.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -157,6 +148,10 @@
       <screen x="55" y="27" width="1311" height="741" />
     </state>
     <state x="592" y="266" width="216" height="261" key="EnvironmentVariablesDialog/55.27.1311.741@55.27.1311.741" timestamp="1599049733061" />
+    <state x="455" y="140" width="501" height="513" key="FileChooserDialogImpl" timestamp="1600080772405">
+      <screen x="55" y="27" width="1311" height="741" />
+    </state>
+    <state x="455" y="140" width="501" height="513" key="FileChooserDialogImpl/55.27.1311.741@55.27.1311.741" timestamp="1600080772405" />
     <state width="1238" height="225" key="GridCell.Tab.0.bottom" timestamp="1599756036577">
       <screen x="0" y="23" width="1280" height="723" />
     </state>
@@ -230,10 +225,10 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/users$Test_rolessrvc_Add_in_users_test__1_.out" NAME="Test_rolessrvc_Add in users/test (1) Coverage Results" MODIFIED="1599212727375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/users$Test_rolessrvc_List_in_users_test__2_.out" NAME="Test_rolessrvc_List in users/test (2) Coverage Results" MODIFIED="1599484452723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/users$go_test_users_internal_role.out" NAME="go test users/internal/role Coverage Results" MODIFIED="1599646609166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/users$go_test_users_test.out" NAME="go test users/test Coverage Results" MODIFIED="1599498780015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/users$gobench_users_test.out" NAME="gobench users/test Coverage Results" MODIFIED="1599498748860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/users$go_test_users_internal_user.out" NAME="go test users/internal/user Coverage Results" MODIFIED="1599673157421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/users$go_test_users_internal_role.out" NAME="go test users/internal/role Coverage Results" MODIFIED="1599646609166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/users$Test_rolessrvc_List_in_users_test__2_.out" NAME="Test_rolessrvc_List in users/test (2) Coverage Results" MODIFIED="1599484452723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/users$go_test_users_test.out" NAME="go test users/test Coverage Results" MODIFIED="1599498780015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

@@ -1,7 +1,6 @@
 package role
 
 import (
-	"fmt"
 	"users/gen/roles"
 	storage "users/pkg/db"
 )
@@ -69,10 +68,10 @@ func (m *Manager) Remove(name string) (err error) {
 	return m.Db.Delete(name)
 }
 
+// CheckRoleExists ..
 func (m *Manager) CheckRoleExists(role string) (bool, error) {
 	res := &roles.StoredRole{}
 	err := m.Db.Load(role, res)
-	fmt.Printf("res: %v\n", *res)
 
 	// Check role existence
 	if err != nil {

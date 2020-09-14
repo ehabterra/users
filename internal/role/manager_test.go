@@ -18,8 +18,8 @@ func Test_Add(t *testing.T) {
 	sp := roles.StoredRole{Name: name, Description: &des}
 	r := roles.Role{Name: name, Description: &des}
 
-	roleMock.On("NewID", storage.RoleBucket).Return("1", nil)
-	roleMock.On("Save", storage.RoleBucket, name, &sp).Return(nil)
+	roleMock.On("NewID").Return("1", nil)
+	roleMock.On("Save", name, &sp).Return(nil)
 
 	type fields struct {
 		db storage.Db
@@ -59,11 +59,11 @@ func Test_Add(t *testing.T) {
 func Test_List(t *testing.T) {
 	roleMock := mocks.Db{}
 	des := "Administrator"
-	wantRes := roles.StoredRoleCollection{{"admin", &des}}
+	wantRes := roles.StoredRoleCollection{{Name: "admin", Description: &des}}
 	var res roles.StoredRoleCollection
 
-	roleMock.On("LoadAll", storage.RoleBucket, &res).Return(nil).Run(func(args mock.Arguments) {
-		arg := args.Get(1).(*roles.StoredRoleCollection)
+	roleMock.On("LoadAll", &res).Return(nil).Run(func(args mock.Arguments) {
+		arg := args.Get(0).(*roles.StoredRoleCollection)
 		*arg = append(*arg, &roles.StoredRole{Name: "admin", Description: &des})
 		fmt.Printf("value %v, type %T \n", arg, arg)
 	})
@@ -106,7 +106,7 @@ func Test_Remove(t *testing.T) {
 	roleMock := mocks.Db{}
 	wantDelete := "admin"
 
-	roleMock.On("Delete", storage.RoleBucket, wantDelete).Return(nil)
+	roleMock.On("Delete", wantDelete).Return(nil)
 	s := Manager{Db: &roleMock}
 
 	if err := s.Remove(wantDelete); err != nil {
@@ -125,13 +125,13 @@ func Test_Show(t *testing.T) {
 	type args struct {
 		name string
 	}
-	roleMock.On("Load", storage.RoleBucket, wantShow, res).Return(nil).Run(func(args mock.Arguments) {
-		arg := args.Get(2).(*roles.StoredRole)
+	roleMock.On("Load", wantShow, res).Return(nil).Run(func(args mock.Arguments) {
+		arg := args.Get(1).(*roles.StoredRole)
 		fmt.Print(arg)
 		arg.Name = wantShow
 		arg.Description = &wantDes
 	})
-	roleMock.On("Load", storage.RoleBucket, wantShow2, res).Return(storage.ErrNotFound)
+	roleMock.On("Load", wantShow2, res).Return(storage.ErrNotFound)
 
 	type fields struct {
 		db storage.Db
@@ -182,7 +182,7 @@ func Test_Update(t *testing.T) {
 	sp := roles.StoredRole{Name: name, Description: &des}
 	r := roles.Role{Name: name, Description: &des}
 
-	roleMock.On("Save", storage.RoleBucket, name, &sp).Return(nil)
+	roleMock.On("Save", name, &sp).Return(nil)
 
 	type fields struct {
 		db storage.Db
@@ -214,6 +214,57 @@ func Test_Update(t *testing.T) {
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Update() error = %v, wantErr %v", err, tt.wantErr)
 				return
+			}
+		})
+	}
+}
+
+func TestManager_CheckRoleExists(t *testing.T) {
+	userMock := &mocks.Db{}
+	roleName := "admin"
+	roleDesc := "Administrator"
+	emptyRole := &roles.StoredRole{}
+
+	userMock.On("Load", roleName, emptyRole).Return(func(key string, res interface{}) error {
+		role := res.(*roles.StoredRole)
+		role.Name = "admin"
+		role.Description = &roleDesc
+
+		return nil
+	})
+	type fields struct {
+		Db storage.Db
+	}
+	type args struct {
+		role string
+	}
+	tests := []struct {
+		name    string
+		fields  fields
+		args    args
+		want    bool
+		wantErr bool
+	}{
+		{
+			"CheckRoleExistence",
+			fields{userMock},
+			args{roleName},
+			true,
+			false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			m := &Manager{
+				Db: tt.fields.Db,
+			}
+			got, err := m.CheckRoleExists(tt.args.role)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("CheckRoleExists() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got != tt.want {
+				t.Errorf("CheckRoleExists() got = %v, want %v", got, tt.want)
 			}
 		})
 	}
