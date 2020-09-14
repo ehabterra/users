@@ -5,6 +5,7 @@ import (
 	storage "users/pkg/db"
 )
 
+// Manager to manager roles
 type Manager struct {
 	Db storage.Db
 }
@@ -52,6 +53,7 @@ func (m *Manager) Add(p *roles.Role) error {
 	return nil
 }
 
+// Update existing role
 func (m *Manager) Update(p *roles.Role) error {
 	sb := roles.StoredRole{
 		Name:        p.Name,
