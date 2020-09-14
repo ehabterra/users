@@ -8,10 +8,9 @@ GOGET=$(GOCMD) get
 SERVER_BINARY=users
 CLIENT_BINARY=users-cli
 
-all: test build
+all: build test
 build: 
-	$(GOBUILD) ./cmd/$(SERVER_BINARY)
-	$(GOBUILD) ./cmd/$(CLIENT_BINARY)
+	$(GOBUILD) ./cmd/$(SERVER_BINARY) && $(GOBUILD) ./cmd/$(CLIENT_BINARY)
 test: 
 	$(GOTEST) -v ./...
 clean: 
@@ -20,5 +19,4 @@ clean:
 	rm -f $(CLIENT_BINARY)
 run:
 	$(GORUN) ./cmd/$(SERVER_BINARY)
-
 

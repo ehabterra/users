@@ -12,6 +12,13 @@ import (
 
 type Bucket string
 
+const (
+	// RoleBucket db
+	RoleBucket Bucket = "ROLE"
+	// UserBucket db
+	UserBucket Bucket = "USER"
+)
+
 // Bolt is the database driver.
 type Bolt struct {
 	// client is the Bolt client.

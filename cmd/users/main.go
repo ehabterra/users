@@ -21,13 +21,6 @@ import (
 	"github.com/boltdb/bolt"
 )
 
-const (
-	// RoleBucket db
-	RoleBucket storage.Bucket = "ROLE"
-	// UserBucket db
-	UserBucket storage.Bucket = "USER"
-)
-
 func main() {
 	// Define command line flags, add any other flag required to configure the
 	// service.
@@ -60,6 +53,8 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		// Setup database
+		defer db.Close()
 	}
 
 	// Initialize the services.
@@ -67,16 +62,11 @@ func main() {
 		userAPI users.Service
 		roleAPI roles.Service
 	)
-	{
-		// Setup database
-		defer db.Close()
+	roleManager := role.NewManager(getBoltDB(db, storage.RoleBucket))
+	userManager := user.NewManager(getBoltDB(db, storage.UserBucket), roleManager)
 
-		roleManager := role.NewManager(getBoltDB(db, RoleBucket))
-		userManager := user.NewManager(getBoltDB(db, UserBucket), roleManager)
-
-		userAPI = api.NewUser(userManager)
-		roleAPI = api.NewRole(roleManager)
-	}
+	userAPI = api.NewUser(userManager)
+	roleAPI = api.NewRole(roleManager)
 
 	// Wrap the services in endpoints that can be invoked from other services
 	// potentially running in different processes.

@@ -62,10 +62,11 @@ func Test_List(t *testing.T) {
 	wantRes := roles.StoredRoleCollection{{Name: "admin", Description: &des}}
 	var res roles.StoredRoleCollection
 
-	roleMock.On("LoadAll", &res).Return(nil).Run(func(args mock.Arguments) {
-		arg := args.Get(0).(*roles.StoredRoleCollection)
+	roleMock.On("LoadAll", &res).Return(func(args interface{}) error {
+		arg := args.(*roles.StoredRoleCollection)
 		*arg = append(*arg, &roles.StoredRole{Name: "admin", Description: &des})
 		fmt.Printf("value %v, type %T \n", arg, arg)
+		return nil
 	})
 
 	type fields struct {
