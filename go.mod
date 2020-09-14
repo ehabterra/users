@@ -7,7 +7,7 @@ require (
 	github.com/dropbox/godropbox v0.0.0-20200228041828-52ad444d3502
 	github.com/golang/protobuf v1.4.2
 	github.com/grpc-ecosystem/go-grpc-middleware v1.2.1
-	github.com/inconshreveable/log15 v0.0.0-20200109203555-b30bc20e4fd1
+	github.com/inconshreveable/log15 v0.0.0-20200109203555-b30bc20e4fd1 // indirect
 	github.com/mattn/go-colorable v0.1.7 // indirect
 	github.com/stretchr/testify v1.5.1
 	goa.design/goa/v3 v3.2.3
